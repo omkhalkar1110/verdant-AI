@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-forest-deep: #0D1F16;
+  --color-emerald-accent: #10b981;
+  --color-slate-muted: #94a3b8;
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-forest-deep text-slate-200 transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-glass-bg backdrop-blur-xl border border-glass-border shadow-2xl;
+  }
+  
+  .nav-link {
+    @apply px-4 py-2 rounded-full transition-all duration-200 text-slate-400 hover:text-white hover:bg-white/5;
+  }
+  
+  .nav-link-active {
+    @apply text-emerald-accent border-b-2 border-emerald-accent rounded-none bg-transparent hover:bg-transparent;
+  }
+
+  .btn-primary {
+    @apply bg-emerald-accent text-forest-deep font-bold py-3 px-6 rounded-xl transition-all active:scale-95 hover:opacity-90;
+  }
+
+  .card-eco {
+    @apply bg-glass-bg backdrop-blur-xl border border-glass-border shadow-2xl rounded-3xl p-6 transition-transform hover:-translate-y-1;
+  }
+}
+
