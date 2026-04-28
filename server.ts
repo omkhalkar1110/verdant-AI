@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import { existsSync } from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,12 +40,25 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    // In production, the server is inside dist/
-    // Serve static files from the same directory
+    // In production, serve from the dist folder.
+    // If the server itself is in the dist folder, distPath is current dir.
     const distPath = __dirname;
+    
+    const indexPath = path.join(distPath, "index.html");
+    const indexExists = existsSync(indexPath);
+    
+    console.log(`[Production] Selected distPath: ${distPath}`);
+    console.log(`[Production] Checking index.html at ${indexPath}: ${indexExists ? "Exists" : "MISSING!"}`);
+    
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      const indexPath = path.join(distPath, "index.html");
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error(`[Error] Failed to send index.html: ${err.message}`);
+          res.status(500).send("Error loading application");
+        }
+      });
     });
   }
 
@@ -53,4 +67,7 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error("Critical Server Startup Error:", err);
+  process.exit(1);
+});
