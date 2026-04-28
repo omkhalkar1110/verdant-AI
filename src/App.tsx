@@ -12,6 +12,7 @@ import Marketplace from "./pages/Marketplace";
 import AIAssistant from "./pages/AIAssistant";
 import Analytics from "./pages/Analytics";
 import Community from "./pages/Community";
+import Leaderboard from "./pages/Leaderboard";
 import { AnimatePresence } from "motion/react";
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
                   <Route path="/analytics" element={<Analytics />} />
                   <Route path="/community" element={<Community />} />
                   <Route path="/ai-coach" element={<AIAssistant />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
                   <Route path="*" element={<Navigate to="/dashboard" />} />
                 </Routes>
               </main>

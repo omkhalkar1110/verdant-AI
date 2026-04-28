@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-import { Zap, Award, Activity, TreeDeciduous, TrendingDown } from "lucide-react";
+import { Zap, Award, Activity, TreeDeciduous, TrendingDown, Trophy, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PIE_DATA = [
   { name: "Used", value: 65, color: "#88a096" },
@@ -45,7 +46,7 @@ export default function Dashboard() {
       </header>
 
       {/* Hero Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -61,6 +62,27 @@ export default function Dashboard() {
             <h3 className="text-3xl font-bold mt-1 text-white">{stat.value}</h3>
           </motion.div>
         ))}
+        {/* Leaderboard Teaser */}
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="card-eco border-amber-500/20 bg-amber-500/5 group cursor-pointer relative overflow-hidden"
+        >
+            <Link to="/leaderboard" className="block">
+                <div className="p-2 w-fit rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 mb-4 transition-transform group-hover:scale-110">
+                    <Trophy size={22} />
+                </div>
+                <div className="flex justify-between items-end">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-amber-500/60">Global Rank</p>
+                        <h3 className="text-3xl font-black mt-1 text-white italic">#1,242</h3>
+                    </div>
+                    <ArrowRight size={20} className="text-amber-500 opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0" />
+                </div>
+            </Link>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-2xl rounded-full translate-x-12 -translate-y-12" />
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

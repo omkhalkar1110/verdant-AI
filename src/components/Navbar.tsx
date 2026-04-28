@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, ShoppingBag, BarChart3, Users, MessageSquare, Moon, Sun, Leaf } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, BarChart3, Users, MessageSquare, Trophy, Moon, Sun, Leaf } from "lucide-react";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
 
@@ -17,6 +17,7 @@ export default function Navbar({ toggleDarkMode, isDarkMode }: NavbarProps) {
     { name: "Analytics", path: "/analytics", icon: BarChart3 },
     { name: "Community", path: "/community", icon: Users },
     { name: "AI Coach", path: "/ai-coach", icon: MessageSquare },
+    { name: "Leaders", path: "/leaderboard", icon: Trophy },
   ];
 
   return (
